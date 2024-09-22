@@ -10,6 +10,9 @@ from azure.ai.textanalytics import TextAnalyticsClient
 from azure.core.credentials import AzureKeyCredential
 from azure.keyvault.secrets import SecretClient
 from azure.identity import ClientSecretCredential
+from azure.keyvault.secrets import SecretClient
+from azure.identity import DefaultAzureCredential
+
 from openai import AzureOpenAI
 
 
@@ -21,16 +24,15 @@ def main():
     # Get Configuration Settings
     openai_endpoint = 'YOUR_OPENAI_ENDPOINT'
     key_vault_name = 'THE_KEY_VAULT_NAME'
-    app_tenant = 'YOUR_TENANT_ID'
-    app_id = 'YOUR_APP_ID'
-    app_password = 'YOUR_APP_PASSWORD'
+    client_id = "YOUR_CLIENT_ID"
+    secret_name = "YOUR_SECRET_NAME"
     model = "YOUR_GPT_ENGINE_NAME"
 
     # Get Azure AI services key from keyvault using the service principal credentials
     key_vault_uri = f"https://{key_vault_name}.vault.azure.net/"
-    credential = ClientSecretCredential(app_tenant, app_id, app_password)
+    credential = DefaultAzureCredential(managed_identity_client_id=client_id)
     keyvault_client = SecretClient(key_vault_uri, credential)
-    secret_key = keyvault_client.get_secret("Cognitive-Services-Key")
+    secret_key = keyvault_client.get_secret(secret_name)
     openai_key = secret_key.value
     print("openai primary key is: {}".format(openai_key))
 
