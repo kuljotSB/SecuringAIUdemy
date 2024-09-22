@@ -6,7 +6,6 @@
 
 from dotenv import load_dotenv
 import os
-from azure.ai.textanalytics import TextAnalyticsClient
 from azure.core.credentials import AzureKeyCredential
 from azure.keyvault.secrets import SecretClient
 from azure.identity import ClientSecretCredential
