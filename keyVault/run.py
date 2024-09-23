@@ -1,9 +1,3 @@
-#pip install the following libraries first and foremost by  opening the file in an integrated terminal
-#pip install azure-ai-textanalytics==5.3.0
-#pip install azure-identity==1.5.0
-#pip install azure-keyvault-secrets==4.2.0
-#pip install openai 
-
 from dotenv import load_dotenv
 import os
 from azure.core.credentials import AzureKeyCredential
